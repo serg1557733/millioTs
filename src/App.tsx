@@ -1,33 +1,6 @@
 import { useState } from "react";
-import backgroundImage from "../public/3.png";
-
-const questions = [
-  {
-    question: "Какая из этих птиц является символом Украины?",
-    options: ["Орел", "Ласточка", "Сова", "Журавль"],
-    answer: "Журавль",
-  },
-  {
-    question: "Какая столица Украины?",
-    options: ["Харьков", "Одесса", "Киев", "Львов"],
-    answer: "Киев",
-  },
-  {
-    question: "Как называется река, которая протекает через Киев?",
-    options: ["Днепр", "Дон", "Прут", "Днестр"],
-    answer: "Днепр",
-  },
-  {
-    question: "Какой украинский город называют 'городом львов'?",
-    options: ["Львов", "Черкассы", "Одесса", "Черновцы"],
-    answer: "Львов",
-  },
-  {
-    question: "Какой цвет в украинском флаге символизирует небо?",
-    options: ["Желтый", "Красный", "Зеленый", "Синий"],
-    answer: "Синий",
-  },
-];
+import backgroundImage from "./assets/img/3.png";
+import { questions } from "./data/quizQuestions";
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
