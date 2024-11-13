@@ -1,10 +1,14 @@
-import backgroundImage from "./assets/img/3.png";
+import backgroundImage from "../assets/img/3.png";
 import { useState } from "react";
 import { questions } from "../data/quizQuestions";
+import { useNavigate } from "react-router-dom";
+import euro from "../assets/img/4e.png";
 
 const QuizPage = () => {
+  const navigate = useNavigate();
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(localStorage.getItem("balance") ?? 0);
   const [answered, setAnswered] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
@@ -12,7 +16,11 @@ const QuizPage = () => {
     setAnswered(true);
     setSelectedAnswer(answer);
     if (answer === questions[currentQuestionIndex].answer) {
-      setScore(score + 100);
+      setScore((prevScore) => {
+        const newScore = +prevScore + 100;
+        localStorage.setItem("balance", newScore.toString());
+        return newScore;
+      });
     }
   };
   const handleNextQuestion = () => {
@@ -26,6 +34,10 @@ const QuizPage = () => {
   };
 
   const { question, options } = questions[currentQuestionIndex];
+
+  const handleRedirect = () => {
+    navigate("/");
+  };
 
   return (
     <div
@@ -50,17 +62,19 @@ const QuizPage = () => {
       >
         Мишка хочет стать миллионером?
       </h1>
-      <h2
-        style={{
-          padding: "10px",
-          alignSelf: "flex-start",
-          color: "green",
-          background: "white",
-          borderRadius: "20px",
-        }}
-      >
-        Ваш счет: {score} Euro
-      </h2>
+
+      <div className="flex-col self-start">
+        <div className="w-48 animate-bounce">
+          <img src={euro} alt="euro" />
+        </div>
+        <h2 className="border border-l-amber-300 border-solid font-bold bg-red-600">
+          Ваш счет: {score} Euro
+        </h2>
+        <button className="bg-slate-500 m-2" onClick={() => handleRedirect()}>
+          На главную страницу
+        </button>
+      </div>
+
       <div
         style={{
           margin: "40px",
@@ -69,6 +83,7 @@ const QuizPage = () => {
       >
         <div>
           <h2
+            className="mb-2"
             style={{
               padding: "10px",
               fontSize: "35px",
