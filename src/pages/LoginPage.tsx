@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-const Login = () => {
+export type LoginProps = {
+  onLogin: (token: string) => void;
+};
+const Login = ({ onLogin }: LoginProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username === "mykhailo" && password === "admin") {
       localStorage.setItem("auth", "true");
-      navigate("/quizpage");
+      onLogin("true");
     } else {
       alert("Неверные имя пользователя или пароль"); //test
     }

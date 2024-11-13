@@ -1,12 +1,10 @@
 import backgroundImage from "../assets/img/3.png";
 import { useState } from "react";
 import { questions } from "../data/quizQuestions";
-import { useNavigate } from "react-router-dom";
 import euro from "../assets/img/4e.png";
+import { LoginProps } from "./LoginPage";
 
-const QuizPage = () => {
-  const navigate = useNavigate();
-
+const QuizPage = ({ onLogin }: LoginProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(localStorage.getItem("balance") ?? 0);
   const [answered, setAnswered] = useState(false);
@@ -35,10 +33,6 @@ const QuizPage = () => {
   };
 
   const { question, options } = questions[currentQuestionIndex];
-
-  const handleRedirect = () => {
-    navigate("/");
-  };
 
   return (
     <div
@@ -71,8 +65,12 @@ const QuizPage = () => {
         <h2 className="border border-l-amber-300 border-solid font-bold bg-red-600">
           Ваш счет: {score} Euro
         </h2>
-        <button className="bg-slate-500 m-2" onClick={() => handleRedirect()}>
-          На главную страницу
+        <button
+          onClick={() => {
+            onLogin("");
+          }}
+        >
+          EXIT
         </button>
       </div>
 
