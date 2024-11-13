@@ -23,6 +23,7 @@ const QuizPage = () => {
       });
     }
   };
+
   const handleNextQuestion = () => {
     setAnswered(false);
     setSelectedAnswer("");
