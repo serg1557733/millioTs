@@ -16,25 +16,29 @@ const Login = ({ onLogin }: LoginProps) => {
   };
   return (
     <div className="flex-col content-center justify-items-center w-[100vw] h-[100vh]">
-      <div className="m-2 w-1/3">
-        <h1>Login</h1>
+      <div className="m-2 w-3/4">
+        <h1 className="m-2">Login</h1>
         <h2>Введите свое имя и пароль</h2>
       </div>
 
-      <div className="flex flex-col content-between m-3 w-1/2">
+      <div className="flex flex-col m-3 w-1/4">
         <input
+          className="m-2"
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
+          className="m-2"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleLogin}>Login</button>
+        <button className="m-2 bg-blue-500" onClick={handleLogin}>
+          Login
+        </button>
       </div>
     </div>
   );
