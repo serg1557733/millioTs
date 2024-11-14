@@ -33,7 +33,7 @@ const QuizPage = ({ onLogin }: LoginProps) => {
   };
 
   const { question, options } = questions[currentQuestionIndex];
-
+  const rightAnswer = selectedAnswer === questions[currentQuestionIndex].answer;
   return (
     <div
       style={{
@@ -49,23 +49,12 @@ const QuizPage = ({ onLogin }: LoginProps) => {
         alignItems: "center",
       }}
     >
-      <h1
-        style={{
-          fontFamily: "Arial, sans-serif",
-          padding: "10px",
-        }}
-      >
-        Мишка хочет стать миллионером?
-      </h1>
-
-      <div className="flex-col self-start">
-        <div className="w-48 animate-bounce">
-          <img src={euro} alt="euro" />
-        </div>
-        <h2 className="border border-l-amber-300 border-solid font-bold bg-red-600">
-          Ваш счет: {score} Euro
-        </h2>
+      <div className="flex justify-around content-center w-3/4 p-3">
+        <h1 className="m-3 p-3 bg-blue-600 rounded-3xl">
+          Кто хочет стать миллионером?
+        </h1>
         <button
+          className="bg-red-500 h-3/4 m-2"
           onClick={() => {
             onLogin("");
           }}
@@ -74,31 +63,27 @@ const QuizPage = ({ onLogin }: LoginProps) => {
         </button>
       </div>
 
-      <div
-        style={{
-          margin: "40px",
-          alignSelf: "center",
-        }}
-      >
+      <div className="flex-col self-end m-7">
+        <div className={`w-48 ${rightAnswer ? "animate-bounce" : ""}`}>
+          <img src={euro} alt="euro" />
+        </div>
+        <h2 className="p-4 border rounded-3xl border-l-amber-300 border-solid font-bold bg-red-600">
+          Ваш счет: {score} Euro
+        </h2>
+      </div>
+
+      <div className="m-8">
         <div>
-          <h2
-            className="mb-2"
-            style={{
-              padding: "10px",
-              fontSize: "35px",
-              background: "white",
-              color: "blue",
-              borderRadius: "20px",
-            }}
-          >
+          <h2 className="mb-2 p-6 rounded-3xl font-bold bg-blue-600">
             Вопрос {currentQuestionIndex + 1}: {question}
           </h2>
-          <div style={{ marginBottom: "20px" }}>
+          <div className="m-3">
             {options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswerClick(option)}
                 style={{
+                  height: "60px",
                   backgroundColor:
                     selectedAnswer === option
                       ? option === questions[currentQuestionIndex].answer
